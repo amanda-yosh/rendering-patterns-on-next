@@ -54,8 +54,8 @@ export default function StaticRenderingWithFetch() {
                     {isLoading
                         ? <DogCardSkeleton />
                         : <div className={styles.dogWrapper}>
-                            {data.map((dog: DogData) => (
-                                <DogCard {...dog} />
+                            {data.map(({ dog, idx }: { dog: DogData, idx: number }) => (
+                                <DogCard {...dog} key={idx} />
                             ))}
                         </div>
                     }
@@ -87,7 +87,7 @@ export default function StaticRenderingWithFetch() {
                             <span className={styles.focus}>Este padrão também é facilmente cacheável através de uma CDN.</span>
                         </p>
 
-                        <Alert type="warn">
+                        <Alert>
                             <p>
                                 <span className={styles.focus}>INDICADO PARA</span> páginas que contém dados que mudam a cada requisição; e para páginas que contém componentes com placeholder estáveis.
                             </p>
@@ -136,7 +136,7 @@ export default function StaticRenderingWithFetch() {
 
                     <section>
                         <p>
-                            Embora a renderização estática com fetch do lado do cliente nos dê um bom TTFB e FCP, o LCP não é o ideal, pois o "maior conteúdo" só pode ser exibido depois de obtermos os dados das listagens da rota da API.
+                            Embora a renderização estática com fetch do lado do cliente nos dê um bom TTFB e FCP, o LCP não é o ideal, pois o &quot;maior conteúdo&quot; só pode ser exibido depois de obtermos os dados das listagens da rota da API.
                             <br />
                             Também há uma forte possibilidade de mudanças de layout, especialmente se o tamanho do esqueleto da UI não corresponder ao conteúdo renderizado eventualmente.
                             <br />

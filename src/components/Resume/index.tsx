@@ -20,7 +20,7 @@ export default function Resume({ title, qualifications }: ResumeProps) {
             <h2>{title}</h2>
             <div className={styles.cardsWrapper}>
                 {qualifications.map((qualification) => (
-                    <div className={styles.card}>
+                    <div className={styles.card} key={qualification.name}>
                         <Image
                             className="logo"
                             src={qualification.score === 'good' ? check : warn}

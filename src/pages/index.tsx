@@ -57,7 +57,7 @@ export default function Home() {
           </div>
 
           <p>
-            Durante o desenvolvimento web, um questionamento crucial é: "Onde e quando o conteúdo deve ser renderizado"
+            Durante o desenvolvimento web, um questionamento crucial é: &quot;Onde e quando o conteúdo deve ser renderizado&quot;
             <br />
             As opções — servidor, build ou cliente — influenciam a performance e a experiência do usuário, e a renderização pode ser feita de uma vez, em partes ou progressivamente.
           </p>
@@ -97,7 +97,7 @@ export default function Home() {
 
             <div className={styles.ctas}>
               {pages.map(({ href, name }) => (
-                <Link href={href} className={styles.ctaLink}>
+                <Link href={href} className={styles.ctaLink} key={name}>
                   <Image
                     aria-hidden
                     src="https://nextjs.org/icons/file.svg"

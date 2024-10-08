@@ -36,7 +36,7 @@ export default function StaticRendering() {
                             <br />
                         </p>
 
-                        <Alert type='warn'>
+                        <Alert>
                             <p>
                                 <span className={styles.focus}>INDICADO PARA</span> páginas que não mudam com frequência e exibem os mesmos dados, não importa quem os solicite.
                             </p>

@@ -33,7 +33,7 @@ export default function DogCard({ name, age, breed, image, veterinary_history }:
 
                 <p>Histórico Veterinário</p>
 
-                <p>Vacinas: {vaccines.map((vaccine) => <span>{vaccine},</span>)}</p>
+                <p>Vacinas: {vaccines.map((vaccine) => <span key={vaccine}>{vaccine},</span>)}</p>
                 <p>Vermifugação: <span>{deworming}</span></p>
                 <p>Castrado? <span>{castration ? 'SIM' : 'NÃO'}</span></p>
             </div>

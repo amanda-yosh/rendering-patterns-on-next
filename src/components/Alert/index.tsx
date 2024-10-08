@@ -3,9 +3,8 @@ import warn from '@/assets/icons/warning.svg';
 
 import styles from "./Alert.module.css";
 
-export default function Alert({ children, type }: {
+export default function Alert({ children }: {
     children: React.ReactNode,
-    type: 'warn'
 }) {
     return (
         <div className={styles.card}>
