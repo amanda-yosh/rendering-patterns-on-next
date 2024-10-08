@@ -14,6 +14,13 @@
     font-family: var(--font-geist-sans), Arial, sans-serif;
 }
 
+.dogWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+}
+
 .focus {
     font-weight: 600;
 }
