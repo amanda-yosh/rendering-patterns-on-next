@@ -1,0 +1,36 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    width: 100%;
+    padding: 80px;
+    background-color: #ffde21;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: center;
+    font-family: var(--font-geist-sans), Arial, sans-serif;
+}
+
+.focus {
+    font-weight: 600;
+}
+
+.card {
+    text-align: start;
+}
+
+.card li {
+    list-style: auto;
+    margin-left: 16px;
+}
+
+.section {
+    max-width: 90%;
+    margin: 0 auto;
+    line-height: 1.8rem;
+    display: grid;
+    gap: 16px;
+}

@@ -1,0 +1,25 @@
+.resumeWrapper {
+    border: 2px solid black;
+    border-radius: 12px;
+    padding: 12px;
+}
+
+.resumeWrapper h2 {
+    margin-bottom: 16px;
+}
+
+.card {
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cardsWrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
