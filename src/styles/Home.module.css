@@ -29,3 +29,11 @@
 .ctaLink:hover {
   color: #ffde21;
 }
+
+.section {
+  text-align: center;
+}
+
+.section h2 {
+  margin-bottom: 16px;
+}

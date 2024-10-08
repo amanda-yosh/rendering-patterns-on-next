@@ -5,6 +5,7 @@ import Image from "next/image";
 import Title from "@/components/Title";
 
 import questionGirl from '@/assets/home/question-girl.jpeg';
+import browserRender from '@/assets/home/how-browsers-render-web-pages.png'
 
 import styles from "@/styles/Home.module.css";
 
@@ -79,20 +80,36 @@ export default function Home() {
             SSG | ISR | SSR | Streaming SSR | Edge Rendering | Static Rendering | RSC
           </p>
 
-          <div className={styles.ctas}>
-            {pages.map(({ href, name }) => (
-              <Link href={href} className={styles.ctaLink}>
-                <Image
-                  aria-hidden
-                  src="https://nextjs.org/icons/file.svg"
-                  alt="File icon"
-                  width={16}
-                  height={16}
-                />
-                {name}
-              </Link>
-            ))}
-          </div>
+          <section className={styles.section}>
+            <h2>Como navegadores renderizam páginas web</h2>
+
+            <Image
+              aria-hidden
+              src={browserRender}
+              alt=""
+              width={660}
+              height={300}
+            />
+          </section>
+
+          <section className={styles.section}>
+            <h2>Padrões de Renderização</h2>
+
+            <div className={styles.ctas}>
+              {pages.map(({ href, name }) => (
+                <Link href={href} className={styles.ctaLink}>
+                  <Image
+                    aria-hidden
+                    src="https://nextjs.org/icons/file.svg"
+                    alt="File icon"
+                    width={16}
+                    height={16}
+                  />
+                  {name}
+                </Link>
+              ))}
+            </div>
+          </section>
         </main>
       </div>
     </>
