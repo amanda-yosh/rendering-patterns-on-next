@@ -4,18 +4,28 @@
     padding: 12px;
 }
 
-.resumeWrapper h2 {
+.title {
+    color: #3a3b3c;
     margin-bottom: 16px;
 }
 
 .card {
-    padding: 12px;
-    border-radius: 8px;
-    background-color: #000;
-    color: #fff;
     display: flex;
     align-items: center;
     gap: 8px;
+    color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 12px;
+    width: 240px;
+}
+
+.card.good {
+    background-color: #3a3b3c;
+}
+
+.card.warn {
+    background-color: #555555;
 }
 
 .cardsWrapper {

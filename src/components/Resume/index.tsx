@@ -15,14 +15,16 @@ import styles from "./Resume.module.css";
 
 export default function Resume({ title, qualifications }: ResumeProps) {
     return (
-        // se for warn mudar a cor do background
         <div className={styles.resumeWrapper}>
-            <h2>{title}</h2>
+            <h2 className={styles.title}>{title}</h2>
+
             <div className={styles.cardsWrapper}>
                 {qualifications.map((qualification) => (
-                    <div className={styles.card} key={qualification.name}>
+                    <div
+                        className={`${styles.card} ${qualification.score === 'good' ? styles.good : styles.warn}`}
+                        key={qualification.name}
+                    >
                         <Image
-                            className="logo"
                             src={qualification.score === 'good' ? check : warn}
                             alt=""
                             width={32}
