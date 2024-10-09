@@ -56,7 +56,7 @@ export default function StaticRendering() {
 
                     <section className={pagesStyles.section}>
                         <p>
-                            A grande maioria dos sites hoje possuem conteúdos dinâmicos e personalizados, dessa forma, precisamos de variações na forma como é feita a renderização estática para atender aos diferentes casos de uso. Estas incluem:
+                            A maioria dos sites hoje possuem conteúdos dinâmicos e personalizados, dessa forma, precisamos de variações na forma como é feita a renderização estática para atender aos diferentes casos de uso. Estas incluem:
                         </p>
 
                         <div className={styles.card}>
@@ -93,9 +93,7 @@ export default function StaticRendering() {
                         </p>
                     </section>
 
-                    <div>
-                        <VideoWrapper fileName="video1.webm" source="Fonte: https://www.patterns.dev/vanilla/rendering-patterns" />
-                    </div>
+                    <VideoWrapper fileName="video1.webm" source="Fonte: https://www.patterns.dev/vanilla/rendering-patterns" />
 
                     <Image
                         src={img2}

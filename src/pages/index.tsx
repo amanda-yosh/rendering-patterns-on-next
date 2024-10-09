@@ -57,29 +57,30 @@ export default function Home() {
             </h2>
           </div>
 
-          <p>
-            Durante o desenvolvimento web, um questionamento crucial é: &quot;Onde e quando o conteúdo deve ser renderizado&quot;
-            <br />
-            As opções — servidor, build ou cliente — influenciam a performance e a experiência do usuário, e a renderização pode ser feita de uma vez, em partes ou progressivamente.
-          </p>
+          <section className={pagesStyles.section}>
+            <p>
+              Durante o desenvolvimento web, um questionamento crucial é: &quot;Onde e quando o conteúdo deve ser renderizado&quot;
+              <br />
+              As opções — servidor, build ou cliente — influenciam a performance e a experiência do usuário, e a renderização pode ser feita de uma vez, em partes ou progressivamente.
+            </p>
 
-          <p>
-            A escolha vai depender do caso de uso e irá pesar tanto para o time de desenvolvimento, que utilizará as ferramentas de engenharia para construir a aplicação, quanto para o usuário final, que terá a experiência de utilizar a aplicação.
-          </p>
+            <p>
+              A escolha vai depender do caso de uso e irá pesar tanto para o time de desenvolvimento, que utilizará as ferramentas de engenharia para construir a aplicação, quanto para o usuário final, que terá a experiência de utilizar a aplicação.
+            </p>
 
-          <p>
-            A escolha correta para cada caso de uso pode levar a builds mais rápidos e uma melhor performance a um baixo custo de processamento. Entretanto, a escolha errada pode matar uma aplicação.
-          </p>
+            <p>
+              A escolha correta para cada caso de uso pode levar a builds mais rápidos e uma melhor performance a um baixo custo de processamento. Entretanto, a escolha errada pode matar uma aplicação.
+            </p>
 
-          <p>
-            Aqui, o objetivo é entender os padrões de renderização para colocá-los em desenvolvimento da forma mais certeira possível. Utilizaremos uma aplicação em Next.js para entender e colocar em prática os padrões de renderização.
-          </p>
+            <p>
+              Aqui, o objetivo é entender os padrões de renderização para colocá-los em desenvolvimento da forma mais certeira possível. Utilizaremos uma aplicação em Next.js para entender e colocar em prática estes padrões.
+            </p>
 
-          <p>
-            Alguns padrões de renderização são:
-            <br />
-            SSG | ISR | SSR | Streaming SSR | Edge Rendering | Static Rendering | RSC
-          </p>
+            <p>
+              Mas antes de prosseguir, vamos entender ou relembrar como é feita a renderização de uma página web e o que são CDNs e bordas.
+            </p>
+
+          </section>
 
           <section className={pagesStyles.section}>
             <h2>Como navegadores renderizam páginas web</h2>
@@ -94,7 +95,12 @@ export default function Home() {
           </section>
 
           <section className={pagesStyles.section}>
-            <h2>Padrões de Renderização</h2>
+            <h2>O que é e como funciona uma CDN</h2>
+
+          </section>
+
+          <section className={pagesStyles.section}>
+            <h2 style={{ border: '2px solid #000', padding: '12px' }}>Padrões de Renderização</h2>
 
             <div className={styles.ctas}>
               {pages.map(({ href, name }) => (

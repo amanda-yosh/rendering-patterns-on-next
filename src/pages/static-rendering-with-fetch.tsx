@@ -1,13 +1,14 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import useSWR from "swr";
 
+import VideoWrapper from "@/components/VideoWrapper";
 import DogCard from "@/components/DogCard";
 import Resume from "@/components/Resume";
 import Title from "@/components/Title";
 import Alert from "@/components/Alert";
 
-import img1 from '@/assets/static-rendering/static-rendering-with-fetch1.png'
 import img2 from '@/assets/static-rendering/static-rendering-with-fetch2.png'
 import hehe from '@/assets/static-rendering/hehe.gif'
 
@@ -30,8 +31,11 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 function DogCardSkeleton() {
     return (
-        <div style={{ width: '300px', height: '300px', backgroundColor: '#d6d6d6' }} />
-    )
+        <div className={styles.skeleton}>
+            <div className={styles.skeletonImage} />
+            <div className={styles.skeletonText} />
+        </div>
+    );
 }
 
 export default function StaticRenderingWithFetch() {
@@ -52,24 +56,29 @@ export default function StaticRenderingWithFetch() {
                         Esta é uma página que renderiza de forma estática e faz um fetch do lado do cliente
                     </Title>
 
-                    {isLoading
-                        ? <DogCardSkeleton />
-                        : <div className={styles.dogWrapper}>
-                            {data.map(({ dog, idx }: { dog: DogData, idx: number }) => (
-                                <DogCard {...dog} key={idx} />
-                            ))}
-                        </div>
-                    }
+                    <div className={styles.dogWrapper}>
+                        {isLoading
+                            ? Array.from({ length: 4 }).map(
+                                (_, index) => <DogCardSkeleton key={index} />)
+                            : data.map((dog: DogData) => {
+                                return (
+                                    <DogCard {...dog} key={dog.image} />
+                                )
+                            })
+                        }
+                    </div>
+
 
                     <section className={pagesStyles.section}>
                         <p>
-                            Neste exemplo queremos mostrar uma lista de Doguinhos para adoção. Logo, precisaremos de uma API que nos forneça os dados necessários para essa listagem.
+                            Acima, você viu um exemplo de uma lista de Doguinhos. Para criar essa listagem foi preciso de uma API que nos forneceu os dados necessários.
                         </p>
 
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                             <p>
-                                Usaremos a Renderização Estática com um Fetch do lado do cliente. Este padrão funciona bem quando você quer atualizar dados em cada solicitação (mas os nossos serão sempres os mesmos).
+                                Para isto, usamos a <span className={styles.focus}>Renderização Estática com um Fetch do lado do cliente</span>. Este padrão funciona bem quando você quer atualizar dados em cada solicitação.
                             </p>
+
                             <Image
                                 className={styles.logo}
                                 src={hehe}
@@ -83,30 +92,29 @@ export default function StaticRenderingWithFetch() {
                         <p>
                             <span className={styles.focus}>O HTML é gerado em tempo de build</span> e renderizado com o componente esqueleto, que será substituído pelo componente com os dados da listagem dinâmica após o <span className={styles.focus}>fetch dos dados no lado do cliente</span>.
                             <br />
-                            Utilizamos SWR (lib) para fazer o fetch dos dados no cliente. E construímos uma rota de API personalizada para buscar e retornar os dados dos Doguinhos.
+                            Utilizamos o <Link href="https://swr.vercel.app/pt-BR" style={{ textDecoration: 'underline' }}>SWR</Link> para fazer o fetch dos dados, porque ele possui uma estratégia de invalidação de cache. Primeiro ele retornar os dados do cache (stale) e depois enviar a solicitação de fetch (revalidate), e finalmente retornar com os dados atualizados. Assim, fazemos o fetch para a rota de API personalizada dos Doguinhos.
                             <br />
                             <span className={styles.focus}>Este padrão também é facilmente cacheável através de uma CDN.</span>
                         </p>
-
-                        <Alert>
-                            <p>
-                                <span className={styles.focus}>INDICADO PARA</span> páginas que contém dados que mudam a cada requisição; e para páginas que contém componentes com placeholder estáveis.
-                            </p>
-                        </Alert>
                     </section>
 
-                    <Image
-                        className={styles.logo}
-                        src={img1}
-                        alt="Next.js logo"
-                        width={600}
-                        height={380}
-                        priority
-                    />
+                    <Alert>
+                        <p>
+                            <span className={styles.focus}>INDICADO PARA</span> páginas que contém dados que mudam a cada requisição; e para páginas que contém componentes com placeholder estáveis.
+                        </p>
+                    </Alert>
 
-                    <p>
-                        O arquivo HTML pré-gerado é enviado ao cliente quando o usuário solicita a página. O usuário inicialmente vê a UI do esqueleto sem nenhum dado. O cliente busca os dados da rota da API, recebe a resposta e mostra a listagem.
-                    </p>
+                    <section className={pagesStyles.section}>
+                        <p>
+                            Vamos visualizar o que acontece quando entramos em um site que utiliza a renderização estática com fetch de dados.
+                        </p>
+
+                        <VideoWrapper fileName='video2.webm' source="Fonte: https://www.patterns.dev/vanilla/rendering-patterns" />
+
+                        <p>
+                            O arquivo HTML pré-gerado é enviado ao cliente quando o usuário solicita a página. O usuário inicialmente vê a UI do esqueleto sem nenhum dado. O cliente busca os dados da rota da API, recebe a resposta e mostra a listagem.
+                        </p>
+                    </section>
 
                     <Image
                         className={styles.logo}
@@ -135,7 +143,7 @@ export default function StaticRenderingWithFetch() {
                         ]}
                     />
 
-                    <section>
+                    <section className={pagesStyles.section}>
                         <p>
                             Embora a renderização estática com fetch do lado do cliente nos dê um bom TTFB e FCP, o LCP não é o ideal, pois o &quot;maior conteúdo&quot; só pode ser exibido depois de obtermos os dados das listagens da rota da API.
                             <br />

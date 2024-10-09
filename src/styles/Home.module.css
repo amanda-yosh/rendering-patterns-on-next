@@ -1,7 +1,7 @@
 .ctas {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  flex-wrap: wrap-reverse;
   gap: 16px;
 }
 
@@ -10,8 +10,9 @@
   align-items: center;
   justify-content: center;
   gap: 4px;
+  border-bottom: 2px solid #ffde21;
 }
 
 .ctaLink:hover {
-  color: #ffde21;
+  border-color: #000;
 }

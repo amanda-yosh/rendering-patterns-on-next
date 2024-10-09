@@ -5,7 +5,6 @@ import { StaticImageData } from "next/image";
 import labrador from '@/assets/dogs/labrador.jpg'
 import poodle from '@/assets/dogs/poodle.jpg'
 import beagle from '@/assets/dogs/beagle.jpg'
-import pastor from '@/assets/dogs/pastor.jpg'
 import bulldog from '@/assets/dogs/bulldog.jpg'
 
 type Data = {
@@ -64,17 +63,6 @@ const dogs: Array<Data> = [
             castration: true
         },
         image: beagle
-    },
-    {
-        name: "Max",
-        age: 5,
-        breed: "Pastor Alemão",
-        veterinary_history: {
-            vaccines: ["V8", "Anti-rábica"],
-            deworming: "Em dia",
-            castration: false
-        },
-        image: pastor
     }
 ]
 
@@ -84,5 +72,9 @@ export default function handler(
     req: NextApiRequest,
     res: NextApiResponse<Array<Data>>,
 ) {
-    res.status(200).json(dogs);
+    const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+    delay(1000).then(() => {
+        res.status(200).json(dogs);
+    });
 }
