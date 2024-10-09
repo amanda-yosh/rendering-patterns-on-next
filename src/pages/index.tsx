@@ -7,6 +7,7 @@ import Title from "@/components/Title";
 import questionGirl from '@/assets/home/question-girl.jpeg';
 import browserRender from '@/assets/home/how-browsers-render-web-pages.png'
 
+import pagesStyles from '@/styles/Pages.module.css'
 import styles from "@/styles/Home.module.css";
 
 export default function Home() {
@@ -38,9 +39,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={styles.page}>
-        <main className={styles.main}>
-          <Title>Padrões de Renderização | Rendering Patterns</Title>
+      <div className={pagesStyles.page}>
+        <main className={pagesStyles.main}>
+          <Title borderBlack>Padrões de Renderização | Rendering Patterns</Title>
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
             <Image
@@ -80,7 +81,7 @@ export default function Home() {
             SSG | ISR | SSR | Streaming SSR | Edge Rendering | Static Rendering | RSC
           </p>
 
-          <section className={styles.section}>
+          <section className={pagesStyles.section}>
             <h2>Como navegadores renderizam páginas web</h2>
 
             <Image
@@ -92,7 +93,7 @@ export default function Home() {
             />
           </section>
 
-          <section className={styles.section}>
+          <section className={pagesStyles.section}>
             <h2>Padrões de Renderização</h2>
 
             <div className={styles.ctas}>

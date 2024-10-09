@@ -1,13 +1,15 @@
 import Head from "next/head";
 import Image from "next/image";
 
+import VideoWrapper from "@/components/VideoWrapper";
 import Resume from "@/components/Resume";
 import Title from "@/components/Title";
 import Alert from "@/components/Alert";
 
-import img2 from '@/assets/static-rendering/img2.png'
-import img3 from '@/assets/static-rendering/img3.png'
+import img1 from '@/assets/static-rendering/client-cdn-server.png'
+import img2 from '@/assets/static-rendering/static-network-and-main-thread.png'
 
+import pagesStyles from '@/styles/Pages.module.css'
 import styles from "@/styles/StaticRendering.module.css";
 
 export default function StaticRendering() {
@@ -20,11 +22,11 @@ export default function StaticRendering() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className={styles.page}>
-                <main className={styles.main}>
+            <div className={pagesStyles.page}>
+                <main className={pagesStyles.main}>
                     <Title borderBlack>Esta é uma página que renderiza de forma estática</Title>
 
-                    <section className={styles.section}>
+                    <section className={pagesStyles.section}>
                         <p>
                             A renderização estática é um pattern usado para criar sites rápidos com carregamentos de página quase instantâneos e pouco ou nenhum conteúdo dinâmico.
                             <br />
@@ -33,19 +35,28 @@ export default function StaticRendering() {
                             O conteúdo HTML é estático e <span className={styles.focus}>facilmente armazenável em cache (CDN ou uma rede Edge)</span>.
                             <br />
                             Quando um cliente solicita uma página, uma requisição é enviada para o servidor, que a processa, renderiza o conteúdo HTML e responde esta solicitação. Entre o servidor e o cliente, uma CDN pode ser usada para armazenar em cache o conteúdo HTML. Esta configuração reduz o tempo de resposta e o tempo de carregamento da página, pois o servidor não precisa (re)processar a requisição.
-                            <br />
                         </p>
-
-                        <Alert>
-                            <p>
-                                <span className={styles.focus}>INDICADO PARA</span> páginas que não mudam com frequência e exibem os mesmos dados, não importa quem os solicite.
-                            </p>
-                        </Alert>
                     </section>
 
-                    <section className={styles.section}>
+                    <div style={{ textAlign: 'center' }}>
+                        <Image
+                            src={img1}
+                            alt=""
+                            width={600}
+                            height={200}
+                            priority
+                        />
+                    </div>
+
+                    <Alert>
                         <p>
-                            A grande maioria dos sites hoje possuem conteúdos dinâmicos e personalizados, dessa forma, precisamos de variações na forma como é feita a renderização estática para atender os diferentes casos de uso. Estas incluem:
+                            <span className={styles.focus}>INDICADO PARA</span> páginas que não mudam com frequência e exibem os mesmos dados, não importa quem os solicite.
+                        </p>
+                    </Alert>
+
+                    <section className={pagesStyles.section}>
+                        <p>
+                            A grande maioria dos sites hoje possuem conteúdos dinâmicos e personalizados, dessa forma, precisamos de variações na forma como é feita a renderização estática para atender aos diferentes casos de uso. Estas incluem:
                         </p>
 
                         <div className={styles.card}>
@@ -71,16 +82,20 @@ export default function StaticRendering() {
                         {/* - Melhor para páginas que devem ser regeneradas com base em determinados eventos */}
                     </section>
 
-                    <section className={styles.section}>
+                    <section className={pagesStyles.section}>
                         <h2>Como funciona?</h2>
                         <p>
-                            Esta página (que você está lendo) exibe o mesmo conteúdo para todos no mundo. Ela não contém dados dinâmicos ou conteúdo personalizado.
+                            Esta página (que você está lendo) exibe o mesmo conteúdo para todos no mundo. Ela <span className={styles.focus}>não contém dados dinâmicos</span> ou <span className={styles.focus}>conteúdo personalizado</span>.
                             <br />
                             Quando o site é buildado em um host, o HTML é gerado e salvo no armazenamento estático no servidor.
                             <br />
-                            Quando um usuário solicita a página, o servidor envia o HTML pré-gerado para o cliente e o armazenada em cache no ponto de borda mais próxima do usuário. O navegador então renderiza o HTML e emprega um pacote JavaScript para hidratar a página.
+                            Quando um usuário solicita a página, o servidor envia o HTML pré-gerado para o cliente e o armazenada em cache no ponto de borda mais próxima do usuário. O navegador então renderiza o HTML e emprega um pacote JavaScript para hidratar a página, como mostra o vídeo abaixo.
                         </p>
                     </section>
+
+                    <div>
+                        <VideoWrapper fileName="video1.webm" source="Fonte: https://www.patterns.dev/vanilla/rendering-patterns" />
+                    </div>
 
                     <Image
                         src={img2}
@@ -90,20 +105,8 @@ export default function StaticRendering() {
                         priority
                     />
 
-                    <Image
-                        src={img3}
-                        alt=""
-                        width={600}
-                        height={380}
-                        priority
-                    />
-
-                    <p>
-                        A renderização estática simples é excelente para desempenho porque resulta em um TTFB extremamente rápido, já que o HTML já está disponível no servidor. O navegador recebe uma resposta mais rápida e pode renderizá-lo rapidamente, resultando em um FCP e LCP rápidos. Como o conteúdo é estático, não há mudança de layout durante a renderização.
-                    </p>
-
                     <Resume
-                        title='Renderização Estática'
+                        title='Resumo da Renderização Estática'
                         qualifications={[
                             { name: 'Time To First Byte', score: 'good' },
                             { name: 'First Contentful Paint', score: 'good' },
@@ -120,9 +123,15 @@ export default function StaticRendering() {
                         ]}
                     />
 
-                    <p>
-                        Esta forma de renderização, em conjunto com uma CDN para cache, ajuda a atingir excelentes valores de Core Web Vitals quando o site não precisa de conteúdo dinâmico ou interação do usuário.
-                    </p>
+                    <section className={pagesStyles.section}>
+                        <p>
+                            A renderização estática simples é excelente para desempenho porque resulta em um TTFB extremamente rápido, já que o HTML já está disponível no servidor. O navegador recebe uma resposta mais rápida e pode renderizá-lo rapidamente, resultando em um FCP e LCP rápidos. Como o conteúdo é estático, não há mudança de layout durante a renderização.
+                        </p>
+
+                        <p>
+                            Esta forma de renderização, em conjunto com uma CDN para cache, ajuda a atingir excelentes valores de Core Web Vitals quando o site não precisa de conteúdo dinâmico ou interação do usuário.
+                        </p>
+                    </section>
                 </main>
             </div>
         </>

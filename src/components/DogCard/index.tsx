@@ -15,7 +15,11 @@ interface DogCardProps {
 import styles from "./DogCard.module.css";
 
 export default function DogCard({ name, age, breed, image, veterinary_history }: DogCardProps) {
-    const { vaccines, deworming, castration } = veterinary_history;
+    const {
+        vaccines = [],
+        deworming = '',
+        castration = false
+    } = veterinary_history || {};
 
     return (
         <div className={styles.card}>

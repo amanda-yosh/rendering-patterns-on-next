@@ -1,0 +1,30 @@
+.page {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  min-height: 100%;
+  padding: 80px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  text-align: center;
+}
+
+.section {
+  max-width: 60%;
+  margin: 0 auto;
+  line-height: 1.8rem;
+  display: grid;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .section {
+      max-width: 80%;
+  }
+}
