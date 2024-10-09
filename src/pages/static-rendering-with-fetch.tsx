@@ -71,7 +71,7 @@ export default function StaticRenderingWithFetch() {
 
                     <section className={pagesStyles.section}>
                         <p>
-                            Acima, você viu um exemplo de uma lista de Doguinhos. Para criar essa listagem foi preciso de uma API que nos forneceu os dados necessários.
+                            Acima, você viu um exemplo de uma lista de Doguinhos. Para criar essa listagem foi preciso de uma <Link href='https://nextjs.org/docs/pages/building-your-application/routing/api-routes' style={{ textDecoration: 'underline' }}>API</Link> que nos forneceu os dados necessários.
                         </p>
 
                         <div style={{ display: 'flex', alignItems: 'center' }}>
