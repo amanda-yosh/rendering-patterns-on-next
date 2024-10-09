@@ -5,7 +5,30 @@
     text-align: start;
     gap: 16px;
     padding: 16px;
-    border: 2px solid black;
+    border: 6px solid;
     border-radius: 12px;
-    background-color: #fff;
+    animation: changeColor 3s infinite;
+}
+
+@keyframes changeColor {
+    0% {
+        border-color: red;
+        background-color: rgb(255, 0, 0, 0.3);
+    }
+    25% {
+        border-color: blue;
+        background-color: rgb(0, 0, 255, 0.3);
+    }
+    50% {
+        border-color: green;
+        background-color: rgb(60, 179, 113, 0.3);
+    }
+    75% {
+        border-color: yellow;
+        background-color: rgb(255, 165, 0, 0.3);
+    }
+    100% {
+        border-color: red;
+        background-color: rgb(255, 0, 0, 0.3);
+    }
 }
