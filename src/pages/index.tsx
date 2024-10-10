@@ -7,29 +7,12 @@ import Title from "@/components/Title";
 import questionGirl from '@/assets/home/question-girl.jpeg';
 import browserRender from '@/assets/home/how-browsers-render-web-pages.png'
 
+import { routes } from "@/utils/routes";
+
 import pagesStyles from '@/styles/Pages.module.css'
 import styles from "@/styles/Home.module.css";
 
 export default function Home() {
-  const pages = [
-    {
-      href: '/static-rendering',
-      name: 'Renderização Estática',
-    },
-    {
-      href: '/static-rendering-with-fetch',
-      name: 'Renderização Estática com Fetch',
-    },
-    {
-      href: '/static-rendering-with-getStaticProps',
-      name: 'Renderização Estática com getStaticProps',
-    },
-    {
-      href: '/server-side-rendering',
-      name: 'Renderização do lado do servidor',
-    }
-  ]
-
   return (
     <>
       <Head>
@@ -103,7 +86,7 @@ export default function Home() {
             <h2 style={{ border: '2px solid #000', padding: '12px' }}>Padrões de Renderização</h2>
 
             <div className={styles.ctas}>
-              {pages.map(({ href, name }) => (
+              {routes.map(({ href, name }) => (
                 <Link href={href} className={styles.ctaLink} key={name}>
                   <Image
                     aria-hidden
