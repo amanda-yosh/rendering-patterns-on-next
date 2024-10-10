@@ -16,3 +16,8 @@
 .ctaLink:hover {
   border-color: #000;
 }
+
+.focus {
+  font-weight: 600;
+  text-decoration: underline;
+}

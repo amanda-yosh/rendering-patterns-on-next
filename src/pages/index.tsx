@@ -56,7 +56,7 @@ export default function Home() {
             </p>
 
             <p>
-              Aqui, o objetivo é entender os padrões de renderização para colocá-los em desenvolvimento da forma mais certeira possível. Utilizaremos uma aplicação em Next.js para entender e colocar em prática estes padrões.
+              Aqui, o objetivo é entender os padrões de renderização para colocá-los em desenvolvimento da forma mais certeira possível. Utilizaremos uma <Link href='https://github.com/amanda-yosh/rendering-patterns-on-next' className={styles.focus}>aplicação em Next.js</Link>, que é exatamente este site que você lê, para entender e colocar em prática estes padrões.
             </p>
 
             <p>
