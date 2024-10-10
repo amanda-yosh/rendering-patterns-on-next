@@ -21,7 +21,7 @@ export default function UserCard({ user }: UserProps) {
         <div className={styles.card}>
             <Image
                 className={styles.avatar}
-                src={user.avatar_url}
+                src={avatar_url}
                 alt=""
                 width={60}
                 height={60}

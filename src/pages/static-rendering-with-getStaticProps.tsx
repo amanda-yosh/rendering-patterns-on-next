@@ -115,7 +115,7 @@ export default function StaticRenderingWithGetStaticProps({ user }: InferGetStat
     );
 }
 
-export const getStaticProps = (async (context) => {
+export const getStaticProps = (async () => {
     const amandaGithubUser = await fetch('https://api.github.com/users/amanda-yosh')
     const user = await amandaGithubUser.json()
 
