@@ -18,6 +18,28 @@
     margin-left: 16px;
 }
 
+.button {
+    padding: 16px;
+    border-radius: 8px;
+    color: #d6d6d6;
+    font-weight: 600;
+    background-color: #1e1e1e;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.button:hover {
+    color: #ffde21;
+    background-color: #2e2e2e;
+    transform: translateY(-5px);
+}
+
+.cardButtonWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+}
+
 .skeleton {
     width: 300px;
     height: 300px;
