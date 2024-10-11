@@ -42,11 +42,23 @@ export default function StaticRenderingWithGetStaticProps({ user }: InferGetStat
 
                     <section className={pagesStyles.section}>
                         <p>
-                            O método <Link href='https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-props' style={{ textDecoration: 'underline' }}>getStaticProps</Link> permite que a página HTML seja pré-renderizada <span className={styles.focus}>no momento do build</span> com os dados retornados pelo método. É uma boa solução caso os dados necessários para renderizar a página estiverem disponíveis no momento do build.
+                            O método <Link href='https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-props' style={{ textDecoration: 'underline' }}>getStaticProps</Link> permite que a página HTML seja pré-renderizada <span className={styles.focus}>no momento do build</span> com os dados retornados através do método. Esta é uma boa solução quando os dados necessários para renderizar a página estão disponíveis no momento do build.
                         </p>
 
                         <p>
-                            Assim, podemos evitar fazer fetchs de dados no cliente. Da mesma forma, um componente esqueleto não é necessário enquanto os dados são carregados, pois a página será renderizada com os dados.
+                            Assim, podemos evitar fazer fetchs de dados no cliente e também não precisamos mais de um Skeleton, ou componente esqueleto, enquanto os dados são carregados, pois a página já é renderizada com os dados.
+                        </p>
+
+                        <p>
+                            Como o getStaticProps roda somente no lado do servidor, ele nunca rodará no lado do cliente, e nem será incluído no bundle JS para o navegador, então você pode escrever consultas diretas ao banco de dados sem que elas sejam enviadas aos navegadores. Isso significa que, em vez de buscar uma rota de API no getStaticProps, você pode escrever o código do lado do servidor diretamente no método.
+                        </p>
+
+                        <p>
+                            Quando ocorre o build, além do arquivo HTML da página, o Next.js gera um arquivo JSON contendo o resultado da execução do getStaticProps. Este arquivo é usado no roteamento do lado do cliente por meio de next/link ou next/router.
+                        </p>
+
+                        <p>
+                            Quando você navega para uma página que é pré-renderizada usando getStaticProps, o Next.js busca este arquivo JSON e o usa como props para o componente da página. Isso significa que as transições de página do lado do cliente não chamarão o getStaticProps, pois apenas o JSON exportado é usado.
                         </p>
                     </section>
 

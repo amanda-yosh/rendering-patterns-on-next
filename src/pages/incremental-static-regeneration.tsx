@@ -38,6 +38,10 @@ export default function IncrementalStaticRegeneration() {
 
                             Como exemplo, vamos mostrar uma página com detalhes de usuários do github.
                         </p>
+
+                        <p>
+                            Ao usar a Geração Estática Incremental, o getStaticProps será executado em segundo plano para gerar o JSON necessário para a navegação do lado do cliente. Você pode ver isso na forma de várias solicitações sendo feitas para a mesma página, no entanto, isso é intencional e não tem impacto no desempenho do usuário final.
+                        </p>
                     </section>
 
                     <Alert>
@@ -62,9 +66,13 @@ export default function IncrementalStaticRegeneration() {
 
                     Para habilitar uma atualização da landing page, podemos invalidar automaticamente o cache e regenerar a página em segundo plano em um intervalo específico. Podemos usar isso adicionando um campo revalidate ao objeto retornado.
 
-                    <VideoWrapper fileName='video6.webm' />
+                    <section className={pagesStyles.section}>
+                        <VideoWrapper fileName='video6.webm' />
 
-                    Se um usuário solicitar uma página que esteja no cache por mais tempo do que o número especificado de segundos, o usuário verá inicialmente a página obsoleta. A regeneração da página é acionada simultaneamente. Depois que a página é regenerada em segundo plano, o cache é invalidado e atualizado com a página regenerada recentemente.
+                        <p>
+                            Se um usuário solicitar uma página que esteja no cache por mais tempo do que o número especificado de segundos, o usuário verá inicialmente a página obsoleta. A regeneração da página é acionada simultaneamente. Depois que a página é regenerada em segundo plano, o cache é invalidado e atualizado com a página regenerada recentemente.
+                        </p>
+                    </section>
 
                     <Resume
                         title='Resumo da Renderização Estática'
