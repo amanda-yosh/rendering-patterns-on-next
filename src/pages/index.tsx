@@ -3,9 +3,12 @@ import Link from "next/link";
 import Image from "next/image";
 
 import Title from "@/components/Title";
+import ImageWrapper from "@/components/ImageWrapper";
 
+import domTree from '@/assets/home/dom_tree.webp'
 import questionGirl from '@/assets/home/question-girl.jpeg';
 import browserRender from '@/assets/home/how-browsers-render-web-pages.png'
+import cdnDistributedMap from '@/assets/home/what_is_a_cdn_distributed_server_map.png'
 
 import { routes } from "@/utils/routes";
 
@@ -68,18 +71,53 @@ export default function Home() {
           <section className={pagesStyles.section}>
             <h2>Como navegadores renderizam páginas web</h2>
 
-            <Image
-              aria-hidden
-              src={browserRender}
-              alt=""
-              width={660}
-              height={300}
+            <p>
+              Tudo começa com a requisição do usuário. A partir dela o navegador envia uma solicitação HTTP ao servidor para obter o HTML da página desejada.
+              O servidor retorna esse HTML e com ele o navegador começa a analisar (parsing) o conteúdo e construir a árvore <a href="https://medium.com/allbarbos/dom-b9c308d398b0">DOM (Document Object Model)</a> que representa a estrutura do documento.
+            </p>
+
+            <ImageWrapper
+              image={domTree}
+              source='https://medium.com/allbarbos/dom-b9c308d398b0'
+            />
+
+            <p>
+              Durante o parsing, o navegador identifica e solicita recursos adicionais, como CSS, JavaScript e imagens. Cada um desses recursos pode exigir novas requisições HTTP.
+
+              O CSS recebido é analisado para criar a árvore de estilos (ou CSSOM - CSS Object Model), que contém as regras de estilo aplicadas aos elementos da árvore DOM.
+
+              A partir da combinação da árvore DOM com a árvore de estilos é formada a árvore de renderização. Ela representa quais elementos precisam ser exibidos e como serão estilizados.
+            </p>
+
+            <p>
+              Assim, o navegador calcula a posição e o tamanho de cada elemento na árvore de renderização num processo chamado de layout (ou reflow). E após o layout, o navegador pinta (renderiza) os pixels na tela, preenchendo-a com cores, imagens e texto.
+
+              Essas etapas ocorrem de forma rápida e muitas vezes em paralelo, permitindo que o navegador mostre a página de maneira eficiente. A otimização de cada uma dessas fases pode impactar a performance e a experiência do usuário.
+            </p>
+
+            <ImageWrapper
+              width={800}
+              image={browserRender}
+              source='https://www.cloudflare.com/pt-br/learning/cdn/what-is-a-cdn/'
             />
           </section>
 
           <section className={pagesStyles.section}>
             <h2>O que é e como funciona uma CDN</h2>
 
+            <p>
+              É uma rede de distribuição de conteúdo.
+              <br />
+              Um grupo de servidores distribuidos geograficamente que armazenam conteúdo em cache próximo aos usuários finais, acelerando a transferencia do conteúdo necessário para carregar a página.
+            </p>
+
+            <ImageWrapper
+              width={800}
+              image={cdnDistributedMap}
+              source='https://www.cloudflare.com/pt-br/learning/cdn/what-is-a-cdn/'
+            />
+
+            <p>Legal, agora que já revisamos esses pontos, vamos aos padrões de renderização?</p>
           </section>
 
           <section className={pagesStyles.section}>
