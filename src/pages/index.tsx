@@ -63,13 +63,13 @@ export default function Home() {
             </p>
 
             <p>
-              Mas antes de prosseguir, vamos entender ou relembrar como é feita a renderização de uma página web e o que são CDNs e bordas.
+              Mas antes de prosseguir, vamos entender ou relembrar como é feita a renderização de uma página web e o que são CDNs e redes de borda (Edge).
             </p>
 
           </section>
 
           <section className={pagesStyles.section}>
-            <h2>Como navegadores renderizam páginas web</h2>
+            <h2 style={{ border: '2px solid #000', padding: '12px' }}>Como navegadores renderizam páginas web</h2>
 
             <p>
               Tudo começa com a requisição do usuário. A partir dela o navegador envia uma solicitação HTTP ao servidor para obter o HTML da página desejada.
@@ -82,16 +82,16 @@ export default function Home() {
             />
 
             <p>
-              Durante o parsing, o navegador identifica e solicita recursos adicionais, como CSS, JavaScript e imagens. Cada um desses recursos pode exigir novas requisições HTTP.
-
+              Durante o parsing, o navegador identifica e solicita recursos adicionais, como CSS, JavaScript, imagens, e cada um desses recursos pode exigir novas requisições HTTP.
+              <br />
               O CSS recebido é analisado para criar a árvore de estilos (ou CSSOM - CSS Object Model), que contém as regras de estilo aplicadas aos elementos da árvore DOM.
-
-              A partir da combinação da árvore DOM com a árvore de estilos é formada a árvore de renderização. Ela representa quais elementos precisam ser exibidos e como serão estilizados.
+              <br />
+              A partir da combinação da árvore DOM com a árvore de estilos é formada a árvore de renderização que representa quais elementos precisam ser exibidos e como serão estilizados.
             </p>
 
             <p>
-              Assim, o navegador calcula a posição e o tamanho de cada elemento na árvore de renderização num processo chamado de layout (ou reflow). E após o layout, o navegador pinta (renderiza) os pixels na tela, preenchendo-a com cores, imagens e texto.
-
+              Assim, o navegador calcula a posição e o tamanho de cada elemento na árvore de renderização num processo chamado de layout (ou reflow). E após o layout, ele pinta (renderiza) os pixels na tela, preenchendo-a com cores, imagens e texto.
+              <br />
               Essas etapas ocorrem de forma rápida e muitas vezes em paralelo, permitindo que o navegador mostre a página de maneira eficiente. A otimização de cada uma dessas fases pode impactar a performance e a experiência do usuário.
             </p>
 
@@ -103,12 +103,12 @@ export default function Home() {
           </section>
 
           <section className={pagesStyles.section}>
-            <h2>O que é e como funciona uma CDN</h2>
+            <h2 style={{ border: '2px solid #000', padding: '12px' }}>O que é e como funciona uma CDN</h2>
 
             <p>
-              É uma rede de distribuição de conteúdo.
+              Uma CDN (Content Delivery Network) é uma rede de distribuição de conteúdo.
               <br />
-              Um grupo de servidores distribuidos geograficamente que armazenam conteúdo em cache próximo aos usuários finais, acelerando a transferencia do conteúdo necessário para carregar a página.
+              Um grupo de servidores distribuidos geograficamente que armazenam conteúdo em cache próximo aos usuários finais, acelerando a transferência do conteúdo necessário para carregar a página.
             </p>
 
             <ImageWrapper

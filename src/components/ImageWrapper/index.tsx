@@ -19,7 +19,7 @@ export default function ImageWrapper({ image, source, width = 600, height = 380 
                 height={height}
                 priority
             />
-            {source && <p className={styles.sub}>{source}</p>}
+            {source && <p className={styles.sub}>Fonte: {source}</p>}
         </div>
     );
 }
