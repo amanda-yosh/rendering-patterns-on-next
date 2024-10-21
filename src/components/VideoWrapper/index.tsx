@@ -3,7 +3,7 @@ import styles from './VideoWrapper.module.css'
 export default function VideoWrapper({ fileName, fileType = 'webm', source }: {
     fileName: string,
     fileType?: string,
-    source?: string
+    source: string
 }) {
     return (
         <div className={styles.container}>

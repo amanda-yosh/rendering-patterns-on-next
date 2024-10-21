@@ -4,7 +4,7 @@ import styles from './ImageWrapper.module.css'
 
 interface ImageWrapperProps {
     image: string | StaticImageData,
-    source?: string,
+    source: string,
     width?: number,
     height?: number
 }
