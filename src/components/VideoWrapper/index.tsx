@@ -11,7 +11,7 @@ export default function VideoWrapper({ fileName, fileType = 'webm', source }: {
                 <source src={`/${fileName}`} type={`video/${fileType}`} />
                 Seu navegador não suporta o formato de vídeo.
             </video>
-            <p className={styles.sub}>{source}</p>
+            <p className={styles.sub}>Fonte: {source}</p>
         </div>
     )
 }
