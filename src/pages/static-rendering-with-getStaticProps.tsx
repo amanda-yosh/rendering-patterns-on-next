@@ -1,7 +1,6 @@
 import type { InferGetStaticPropsType, GetStaticProps } from 'next'
 import Head from "next/head";
 import Link from "next/link";
-import Image from "next/image";
 
 import Resume from "@/components/Resume";
 import Title from "@/components/Title";
