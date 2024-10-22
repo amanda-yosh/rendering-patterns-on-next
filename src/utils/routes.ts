@@ -16,7 +16,7 @@ export const routes = [
         name: 'Regeneração Incremental Estática'
     },
     {
-        href: '/on-demant-incremental-static-regeneration',
+        href: '/on-demand-incremental-static-regeneration',
         name: 'Regeneração Incremental Estática On Demand'
     },
     {
