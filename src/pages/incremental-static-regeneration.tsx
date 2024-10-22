@@ -28,19 +28,7 @@ export default function IncrementalStaticRegeneration() {
 
                     <section className={pagesStyles.section}>
                         <p>
-                            A técnica de ISR <span className={styles.focus}>gera algumas página no momento do build e outras sob demanda</span>. As página podem ser cacheadas por uma CDN e o cache é invalidado quando a página é regenerada. Essa técnica reduz o tempo de build, dado que nem todas as páginas são geradas.
-                        </p>
-
-                        <p>
-                            O ISR ajuda a resolver a demora no tempo do build e o problema de dados dinâmicos discutidos na renderização Estática.
-
-                            O ISR permite pré-renderizar certas páginas estáticas e renderizar as páginas dinâmicas sob demanda quando o usuário as solicita. Isso resulta em tempos de build mais curtos e permite a invalidação automática do cache e a regeneração da página após um intervalo de tempo específico.
-
-                            Como exemplo, vamos mostrar uma página com detalhes de usuários do github.
-                        </p>
-
-                        <p>
-                            Ao usar a Geração Estática Incremental, o getStaticProps será executado em segundo plano para gerar o JSON necessário para a navegação do lado do cliente. Você pode ver isso na forma de várias solicitações sendo feitas para a mesma página, no entanto, isso é intencional e não tem impacto no desempenho do usuário final.
+                            A técnica de regeneração incremental estática (ISR do inglês) consiste em <span className={styles.focus}>gerar algumas páginas no momento do build e outras sob demanda</span>. As página podem ser cacheadas por uma CDN e <span className={styles.focus}>o cache é invalidado quando a página é regenerada</span>.
                         </p>
                     </section>
 
@@ -51,26 +39,40 @@ export default function IncrementalStaticRegeneration() {
                     </Alert>
 
                     <section className={pagesStyles.section}>
-                        <ImageWrapper image={img1} source='https://www.dhiwise.com/post/incremental-static-regeneration-a-revolution-in-react-app' />
-
-                        O Next.js nos ajuda a conseguir isso usando o método getStaticPaths para gerar caminhos dinâmicos. Podemos dizer ao Next.js quais páginas pré-gerar com base em seus parâmetros de consulta.
-
-                        Para nossa demonstração, vamos buscar todas as listagens e pré-gerar as páginas para cada uma delas. Observe que isso levaria muito tempo se houvesse milhares de listagens. Nesse caso, teremos que dizer ao Next para pré-gerar apenas um subconjunto de todas as páginas e renderizar um fallback quando as páginas de listagem restantes forem geradas sob demanda (quando o usuário solicitar).
-
-                        As páginas pré-renderizadas e geradas sob demanda são entregues de forma semelhante. Se um usuário solicitar uma página que ainda não foi gerada, ela será gerada sob demanda e armazenada em cache pelo Edge. Assim, apenas o primeiro usuário provavelmente terá uma experiência pior para páginas que não são pré-renderizadas. Todos os outros se beneficiarão da resposta rápida e armazenada em cache.
-                    </section>
-
-                    <VideoWrapper fileName='video5.webm' />
-
-                    Isso resolve o problema de longo tempo de construção dos métodos anteriores. Mas ainda temos a landing page, que precisa ser reimplantada toda vez que temos uma nova listagem.
-
-                    Para habilitar uma atualização da landing page, podemos invalidar automaticamente o cache e regenerar a página em segundo plano em um intervalo específico. Podemos usar isso adicionando um campo revalidate ao objeto retornado.
-
-                    <section className={pagesStyles.section}>
-                        <VideoWrapper fileName='video6.webm' />
+                        <p>
+                            O ISR permite pré-renderizar algumas páginas estáticas e renderizar as páginas dinâmicas quando solicitado. Isso resulta em tempos de build mais curtos e permite a invalidação automática do cache e a regeneração da página após um intervalo de tempo específico.
+                        </p>
 
                         <p>
-                            Se um usuário solicitar uma página que esteja no cache por mais tempo do que o número especificado de segundos, o usuário verá inicialmente a página obsoleta. A regeneração da página é acionada simultaneamente. Depois que a página é regenerada em segundo plano, o cache é invalidado e atualizado com a página regenerada recentemente.
+                            Ao usar o ISR, o getStaticProps é executado em segundo plano para gerar o JSON necessário para a navegação do lado do cliente. Você pode ver isso na forma de várias solicitações sendo feitas para a mesma página, no entanto, isso é intencional e não tem impacto no desempenho do usuário final.
+                        </p>
+
+                        <ImageWrapper image={img1} source='https://www.dhiwise.com/post/incremental-static-regeneration-a-revolution-in-react-app' />
+
+                        <p>
+                            Para gerar caminhos dinâmicos, o Next.js utiliza o método <Link style={{ textDecoration: 'underline' }} href="https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths">getStaticPaths</Link>. Assim, podemos dizer ao Next.js quais páginas pré-gerar com base em seus parâmetros de consulta.
+                            <br />
+                            Para nossa demonstração, vamos buscar algums perfis de contas do github e pré-gerar as páginas para cada uma delas. Vamos fazer apenas um subconjunto, com 4 perfis, mas para listagens muito grandes isso levaria mais tempo. Há casos nos quais podemos renderizar um fallback quando há mais páginas para serem geradas sob demanda, mas não é o que faremos aqui.
+                            <br />
+                            As páginas pré-renderizadas e geradas sob demanda são entregues de forma semelhante. Se um usuário solicitar uma página que ainda não foi gerada, ela será gerada sob demanda e armazenada em cache pelo Edge. Assim, apenas o primeiro usuário terá uma experiência pior para páginas que não são pré-renderizadas. Todos os outros se beneficiarão da resposta rápida e armazenada em cache.
+                        </p>
+                    </section>
+
+                    <section className={pagesStyles.section}>
+                        <VideoWrapper fileName='video5.webm' source='https://www.dhiwise.com/post/incremental-static-regeneration-a-revolution-in-react-app' />
+
+                        {/* <p>
+                            Isso resolve o problema de longo tempo de construção dos métodos anteriores. Mas ainda temos a landing page, que precisa ser reimplantada toda vez que temos uma nova listagem.
+
+                            Para habilitar uma atualização da landing page, podemos invalidar automaticamente o cache e regenerar a página em segundo plano em um intervalo específico. Podemos usar isso adicionando um campo revalidate ao objeto retornado.
+                        </p> */}
+                    </section>
+
+                    <section className={pagesStyles.section}>
+                        <VideoWrapper fileName='video6.webm' source='https://www.dhiwise.com/post/incremental-static-regeneration-a-revolution-in-react-app' />
+
+                        <p>
+                            Se um usuário solicitar uma página que esteja no cache por mais tempo do que o número especificado de segundos, o usuário verá inicialmente a página obsoleta, mas a regeneração da página é acionada simultaneamente. Depois que a página é regenerada em segundo plano, o cache é invalidado e atualizado com a página nova.
                         </p>
                     </section>
 
@@ -94,7 +96,13 @@ export default function IncrementalStaticRegeneration() {
 
                     <section className={pagesStyles.section}>
                         <p>
-                            Resumindo, com o ISR podemos mostrar conteúdo dinâmico revalidando a página de forma automática de tempos em tempos. Entretanto, nosso conteúdo provavelmente não é atualizado com a mesma frequência do intervalo que definimos, resultando em regeneração desnecessária de páginas e invalidação do cache e em custos de servidor mais altos.
+                            Com o ISR podemos mostrar conteúdo dinâmico revalidando a página de forma automática de tempos em tempos. Ele ajuda a resolver a demora do tempo de build, dado que nem todas as páginas são geradas, e o problema de dados dinâmicos discutidos na renderização Estática.
+                            <br />
+                            Entretanto, nosso conteúdo provavelmente não é atualizado com a mesma frequência do intervalo que definimos, resultando em regeneração desnecessária de páginas e invalidação do cache e em custos de servidor mais altos.
+                        </p>
+
+                        <p>
+                            Agora vamos para o exemplo, a página com detalhes de usuários do github.
                         </p>
 
                         <Link href='/incremental-static-regeneration/1' className={styles.button}>
