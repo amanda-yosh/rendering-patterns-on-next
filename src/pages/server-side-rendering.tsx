@@ -1,15 +1,18 @@
 import Head from "next/head";
-import Image from "next/image";
+import Link from "next/link";
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 
 import Resume from "@/components/Resume";
 import Title from "@/components/Title";
+import Alert from "@/components/Alert";
+import ImageWrapper from "@/components/ImageWrapper";
 
-import img2 from '@/assets/server-rendering/ssr2.png'
+import exampleOfDinamicContent from '@/assets/server-rendering/example-of-dinamic-content.jpg'
+import networkAndThread from '@/assets/server-rendering/ssr2.png'
 
 import pagesStyles from '@/styles/Pages.module.css'
 import styles from "@/styles/StaticRendering.module.css";
-import Alert from "@/components/Alert";
+import VideoWrapper from "@/components/VideoWrapper";
 
 type Repo = {
     name: string
@@ -38,15 +41,21 @@ export default function ServerSideRendering({
 
                     <section className={pagesStyles.section}>
                         <p>
-                            Com a renderização do lado do servidor, <span className={styles.focus}>geramos o HTML para cada solicitação</span>. Essa abordagem é mais adequada para páginas que contêm dados personalizados, por exemplo, dados baseados no cookie do usuário ou dados obtidos da solicitação do usuário. Também é adequada para páginas que devem bloquear a renderização, talvez com base no estado de autenticação.
+                            Com a renderização do lado do servidor, <span className={styles.focus}>geramos o HTML para cada solicitação</span>. Essa abordagem é mais adequada para páginas que contêm dados personalizados, por exemplo, baseados no cookie do usuário ou obtidos da solicitação do usuário. E também é adequada para páginas que devem bloquear a renderização, por exemplo, com base no estado de autenticação.
                         </p>
 
                         <p>
-                            Um painel personalizado é um excelente exemplo de conteúdo altamente dinâmico em uma página. A maior parte do conteúdo é baseada na identidade do usuário ou no nível de autorização que pode estar contido em um cookie de usuário. Este painel só mostra quando um usuário é autenticado e possivelmente mostra dados confidenciais específicos do usuário que não devem ser visíveis para outros.
+                            Um painel personalizado é um excelente exemplo de conteúdo altamente dinâmico em uma página.
+                        </p>
+
+                        <ImageWrapper image={exampleOfDinamicContent} width={300} source="Foto de Markus Spiske na Unsplash." />
+
+                        <p>
+                            A maior parte do conteúdo é baseada na identidade do usuário ou no nível de autorização que pode estar contido em um cookie desse usuário. Este painel só mostra quando um usuário é autenticado e possivelmente mostra dados confidenciais específicos do usuário que não devem ser visíveis para outros.
                         </p>
 
                         <p>
-                            O Next.js possui o método <span className={styles.focus}>getServerSideProps</span> que permite a renderização da página no servidor. Esse método <span className={styles.focus}>roda no servidor para cada solicitação</span> e <span className={styles.focus}>passa os dados retornados para a página para gerar o HTML</span>.
+                            O Next.js possui o método <Link style={{ textDecoration: 'underline' }} href='https://nextjs.org/docs/pages/building-your-application/data-fetching/get-server-side-props'>getServerSideProps</Link> que permite a renderização da página no servidor. Esse método <span className={styles.focus}>roda no servidor para cada solicitação</span> e <span className={styles.focus}>passa os dados retornados para a página para gerar o HTML</span>.
                         </p>
 
                         <Alert>
@@ -56,8 +65,6 @@ export default function ServerSideRendering({
                         </Alert>
                     </section>
 
-                    {/* VIDEO!!! */}
-
                     <section className={pagesStyles.section}>
                         <p>
                             Quando um usuário solicita a página, o método getServerSideProps é executado, retorna os dados usados para gerar a página e envia a resposta ao cliente. O cliente então renderiza esse HTML e pode enviar outra solicitação para buscar o pacote JavaScript que hidrata os elementos.
@@ -65,24 +72,18 @@ export default function ServerSideRendering({
                             O conteúdo HTML gerado <span className={styles.focus}>é exclusivo para cada solicitação</span> e <span className={styles.focus}>não deve ser armazenado em cache pela CDN</span>.
                         </p>
 
+                        <VideoWrapper fileName='video7.webm' source="https://www.patterns.dev/vanilla/rendering-patterns" />
+
                         <p>
                             A rede e o thread principal para o cliente são muito semelhantes para renderização estática e do lado do servidor. O FCP é quase igual ao LCP, e podemos facilmente evitar mudanças de layout, pois não há carregamento de conteúdo dinâmico após o carregamento inicial da página.
                         </p>
+
+                        <ImageWrapper image={networkAndThread} source='https://www.patterns.dev/vanilla/rendering-patterns' />
+
+                        <p>
+                            No entanto, o TTFB para páginas renderizadas pelo servidor é significativamente maior do que a renderização estática, pois a página é gerada do zero a cada solicitação. Podemos observar isso através do GET/ do Network.
+                        </p>
                     </section>
-
-                    <Image
-                        src={img2}
-                        alt=""
-                        width={600}
-                        height={300}
-                        priority
-                    />
-
-                    {/* VIDEO */}
-
-                    <p>
-                        No entanto, o TTFB para páginas renderizadas pelo servidor é significativamente maior do que a renderização estática, pois a página é gerada do zero a cada solicitação.
-                    </p>
 
                     <Resume
                         title='Renderização Estática'
@@ -101,6 +102,60 @@ export default function ServerSideRendering({
                             { name: 'Scalable infraestructure', score: 'good' },
                         ]}
                     />
+
+                    <section className={pagesStyles.section}>
+                        <p>
+                            Embora o SSR seja um método excelente quando você deseja renderizar dados altamente personalizados, há algumas coisas a serem consideradas para obter uma ótima experiência do usuário e reduzir os custos do servidor, devido as serveless functions.
+                        </p>
+
+                        <p>
+                            O primeiro ponto é o tempo de execução de getServerSideProps. A página só começa a ser gerada quando os dados do getServerSideProps estam disponíveis. Portanto, devemos garantir que o método getServerSideProps não seja executado por muito tempo.
+                        </p>
+
+                        <p>
+                            Segundo, ter bancos de dados na mesma região que a serveless function. Se os dados estão vindo de um banco, precisamos minimizar o tempo dessas consultas. Então, devemos considerar tanto a otimização da consulta quanto a localização do banco.
+                            <br />
+                            Por exemplo,
+                            {/* Se sua função serverless for implantada em São Francisco, mas seu banco de dados estiver em Tóquio, estabelecer uma conexão e obter os dados pode levar um tempo. Em vez disso, considere mover seu banco de dados para a mesma região que sua função serverless para garantir que suas consultas de banco de dados retornem dados mais rapidamente. */}
+                            <br />
+                        </p>
+
+                        <p>
+                            Terceiro, adicionar cabeçalhos de controle de Cache às respostas para melhorar o desempenho do SSR.
+                        </p>
+
+                        <p>
+                            E quarto, atualizar o hardware do servidor. Isso pode ajudar a processar solicitações individuais e obter respostas mais rapidamente.
+                            <br />
+                        </p>
+                    </section>
+
+
+                    {/* O Vercel usa funções serverless para renderizar suas páginas pelo servidor. */}
+
+                    {/* VIDEO */}
+
+                    {/* <p>
+                            Embora as funções sem servidor tenham muitos benefícios, como pagar apenas pelo que você usa, há algumas limitações. O tempo que leva para iniciar o lambda, conhecido como inicialização a frio longa, é um problema comum com funções sem servidor. Além disso, as conexões com bancos de dados podem ser lentas. Você também não deve chamar uma função sem servidor localizada em um lado do planeta do outro.
+
+                            Edge SSR + Streaming HTTP
+                        </p> */}
+
+                    {/* <p>
+                            A Vercel está atualmente explorando o Edge Server-Side Rendering, que permitirá que os usuários renderizem no servidor de todas as regiões e experimentem uma inicialização a frio quase zero. Outro benefício do Edge SSR é que o tempo de execução do edge permite streaming HTTP.
+                        </p> */}
+
+                    {/* VIDEO */}
+
+                    {/* Com funções sem servidor, geramos a página inteira no lado do servidor e esperamos que todo o pacote seja carregado e analisado no cliente antes que a hidratação possa começar. */}
+
+                    {/* VIDEO */}
+
+                    {/* <p>
+                            Com o Edge SSR, podemos transmitir partes do documento assim que estiverem prontas e hidratar esses componentes granularmente. Isso reduz o tempo de espera para os usuários, pois eles podem ver os componentes conforme eles transmitem, um por um.
+                        </p> */}
+
+                    {/* PAREI EM Streaming SSR + React Server Components */}
                 </main>
             </div>
         </>
