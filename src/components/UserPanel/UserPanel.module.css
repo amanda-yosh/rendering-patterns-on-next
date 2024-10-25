@@ -1,0 +1,78 @@
+.profileCard {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  padding: 20px;
+  text-align: center;
+}
+
+.profileHader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.profileInfo {
+  text-align: center;
+}
+
+.profileInfo h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.login {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.location, .company, .bio {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.profileStats {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat p {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.stat-value {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.profileLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profileLinks a {
+  color: #0366d6;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.profileLinks a:hover {
+  text-decoration: underline;
+}

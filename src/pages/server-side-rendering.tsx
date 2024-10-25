@@ -2,28 +2,22 @@ import Head from "next/head";
 import Link from "next/link";
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 
-import Resume from "@/components/Resume";
 import Title from "@/components/Title";
 import Alert from "@/components/Alert";
+import Resume from "@/components/Resume";
+import UserPanel from "@/components/UserPanel";
 import ImageWrapper from "@/components/ImageWrapper";
+import VideoWrapper from "@/components/VideoWrapper";
 
 import exampleOfDinamicContent from '@/assets/server-rendering/example-of-dinamic-content.jpg'
 import networkAndThread from '@/assets/server-rendering/ssr2.png'
 
 import pagesStyles from '@/styles/Pages.module.css'
 import styles from "@/styles/StaticRendering.module.css";
-import VideoWrapper from "@/components/VideoWrapper";
-
-type Repo = {
-    name: string
-    stargazers_count: number
-}
 
 export default function ServerSideRendering({
-    repo,
+    user,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-    console.log('HERE', repo.stargazers_count)
-
     return (
         <>
             <Head>
@@ -38,6 +32,8 @@ export default function ServerSideRendering({
                     <Title borderBlack>
                         Esta é uma página que renderiza do lado do servidor
                     </Title>
+
+                    <UserPanel user={user} />
 
                     <section className={pagesStyles.section}>
                         <p>
@@ -114,10 +110,6 @@ export default function ServerSideRendering({
 
                         <p>
                             Segundo, ter bancos de dados na mesma região que a serveless function. Se os dados estão vindo de um banco, precisamos minimizar o tempo dessas consultas. Então, devemos considerar tanto a otimização da consulta quanto a localização do banco.
-                            <br />
-                            Por exemplo,
-                            {/* Se sua função serverless for implantada em São Francisco, mas seu banco de dados estiver em Tóquio, estabelecer uma conexão e obter os dados pode levar um tempo. Em vez disso, considere mover seu banco de dados para a mesma região que sua função serverless para garantir que suas consultas de banco de dados retornem dados mais rapidamente. */}
-                            <br />
                         </p>
 
                         <p>
@@ -129,42 +121,49 @@ export default function ServerSideRendering({
                             <br />
                         </p>
                     </section>
-
-
-                    {/* O Vercel usa funções serverless para renderizar suas páginas pelo servidor. */}
-
-                    {/* VIDEO */}
-
-                    {/* <p>
-                            Embora as funções sem servidor tenham muitos benefícios, como pagar apenas pelo que você usa, há algumas limitações. O tempo que leva para iniciar o lambda, conhecido como inicialização a frio longa, é um problema comum com funções sem servidor. Além disso, as conexões com bancos de dados podem ser lentas. Você também não deve chamar uma função sem servidor localizada em um lado do planeta do outro.
-
-                            Edge SSR + Streaming HTTP
-                        </p> */}
-
-                    {/* <p>
-                            A Vercel está atualmente explorando o Edge Server-Side Rendering, que permitirá que os usuários renderizem no servidor de todas as regiões e experimentem uma inicialização a frio quase zero. Outro benefício do Edge SSR é que o tempo de execução do edge permite streaming HTTP.
-                        </p> */}
-
-                    {/* VIDEO */}
-
-                    {/* Com funções sem servidor, geramos a página inteira no lado do servidor e esperamos que todo o pacote seja carregado e analisado no cliente antes que a hidratação possa começar. */}
-
-                    {/* VIDEO */}
-
-                    {/* <p>
-                            Com o Edge SSR, podemos transmitir partes do documento assim que estiverem prontas e hidratar esses componentes granularmente. Isso reduz o tempo de espera para os usuários, pois eles podem ver os componentes conforme eles transmitem, um por um.
-                        </p> */}
-
-                    {/* PAREI EM Streaming SSR + React Server Components */}
                 </main>
             </div>
         </>
     );
 }
 
-export const getServerSideProps = (async () => {
-    const res = await fetch('https://api.github.com/repos/vercel/next.js')
-    const repo: Repo = await res.json()
+type UserProps = {
+    name: string,
+    avatar_url: string,
+    company: string,
+    login: string,
+    location: string,
+    bio: string,
+    id: string,
+    html_url: string,
+    email: string,
+    followers: number,
+    following: number,
+    public_repos: number,
+}
 
-    return { props: { repo } }
-}) satisfies GetServerSideProps<{ repo: Repo }>
+export const getServerSideProps = (async (context) => {
+    const githubUser = context.req.cookies['user_github']
+    const githubUserData = await fetch(`https://api.github.com/users/${githubUser}`)
+    const user: UserProps = await githubUserData.json()
+
+    return {
+        props:
+        {
+            user: {
+                name: user.name || '',
+                avatar_url: user.avatar_url || '',
+                company: user.company || '',
+                login: user.login || '',
+                location: user.location || '',
+                bio: user.bio || '',
+                id: user.id || '',
+                html_url: user.html_url || '',
+                email: user.email || '',
+                followers: user.followers || 0,
+                following: user.following || 0,
+                public_repos: user.public_repos || 0,
+            }
+        }
+    }
+}) satisfies GetServerSideProps<{ user: UserProps }>

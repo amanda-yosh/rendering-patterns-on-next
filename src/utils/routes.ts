@@ -15,10 +15,10 @@ export const routes = [
         href: '/incremental-static-regeneration',
         name: 'Regeneração Incremental Estática'
     },
-    {
-        href: '/on-demand-incremental-static-regeneration',
-        name: 'Regeneração Incremental Estática On Demand'
-    },
+    // {
+    //     href: '/on-demand-incremental-static-regeneration',
+    //     name: 'Regeneração Incremental Estática On Demand'
+    // },
     {
         href: '/server-side-rendering',
         name: 'Renderização do lado do servidor',
